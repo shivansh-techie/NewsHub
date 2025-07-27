@@ -16,7 +16,11 @@ const NewsDetail = () => {
   }, []);
 
   if (!article) {
-    return <p className="text-center mt-10 text-red-500">No article data available.</p>;
+    return (
+      <p className="text-center mt-10 text-red-500">
+        No article data available.
+      </p>
+    );
   }
 
   // Random ad positions: after title, after image, after content
@@ -24,7 +28,14 @@ const NewsDetail = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">{article.title}</h1>
+      <h1 className="text-2xl font-bold mb-2">{article.title}</h1>
+
+      <p className="text-sm text-gray-500 mb-4">
+        {article.source_id} |{" "}
+        {article.pubDate
+          ? new Date(article.pubDate).toLocaleString()
+          : "Unknown date"}
+      </p>
 
       {shouldShowAd() && (
         <ins
@@ -37,8 +48,12 @@ const NewsDetail = () => {
         ></ins>
       )}
 
-      {article.urlToImage && (
-        <img src={article.urlToImage} alt="News" className="w-full h-auto mb-4 rounded" />
+      {article.image_url && (
+        <img
+          src={article.image_url}
+          alt="News"
+          className="w-full h-auto mb-4 rounded"
+        />
       )}
 
       {shouldShowAd() && (
@@ -53,7 +68,9 @@ const NewsDetail = () => {
       )}
 
       <p className="text-gray-700 mb-6 text-justify text-base leading-relaxed">
-        {article.content || article.description || "Full article content not available."}
+        {article.content ||
+          article.description ||
+          "Full article content not available."}
       </p>
 
       {shouldShowAd() && (
@@ -68,7 +85,7 @@ const NewsDetail = () => {
       )}
 
       <a
-        href={article.url}
+        href={article.link || article.url}
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 underline mt-4 block"

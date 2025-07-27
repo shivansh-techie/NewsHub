@@ -20,8 +20,12 @@ const Home = () => {
   // Load top news articles for main section
   useEffect(() => {
     const loadNews = async () => {
-      const news = await fetchTopHeadlines();
-      setArticles(news);
+      try {
+        const news = await fetchTopHeadlines();
+        setArticles(news);
+      } catch (err) {
+        console.error("Failed to fetch news:", err);
+      }
     };
     loadNews();
   }, []);
@@ -29,15 +33,19 @@ const Home = () => {
   // Load latest headlines for sidebar (every 5 minutes)
   useEffect(() => {
     const loadLatestNews = async () => {
-      const news = await fetchTopHeadlines();
-      setLatestHeadlines(news.slice(0, 6)); // ✅ Fetch top 6
+      try {
+        const news = await fetchTopHeadlines();
+        setLatestHeadlines(news.slice(0, 6)); // ✅ Top 6
+      } catch (err) {
+        console.error("Failed to fetch latest news:", err);
+      }
     };
     loadLatestNews();
     const interval = setInterval(loadLatestNews, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Load affiliate links from public/affiliateLinks.json
+  // Load affiliate links
   useEffect(() => {
     const fetchAffiliateLinks = async () => {
       try {
@@ -95,10 +103,10 @@ const Home = () => {
             <ul className="space-y-4">
               {latestHeadlines.slice(0, 3).map((news, idx) => (
                 <li key={idx} className="flex flex-col items-start">
-                  {news.urlToImage && (
+                  {news.image_url && (
                     <Link to={`/news/${idx}`} state={{ article: news }}>
                       <img
-                        src={news.urlToImage}
+                        src={news.image_url}
                         alt="thumbnail"
                         className="w-full h-28 object-cover rounded mb-1"
                       />
@@ -142,17 +150,17 @@ const Home = () => {
             </ul>
           </div>
 
-          {/* Latest Headlines Set 2 (Different News) */}
+          {/* Latest Headlines Set 2 */}
           {latestHeadlines.length >= 6 && (
             <div>
               <h3 className="font-semibold mb-2">More Headlines</h3>
               <ul className="space-y-4">
                 {latestHeadlines.slice(3, 6).map((news, idx) => (
                   <li key={idx + 3} className="flex flex-col items-start">
-                    {news.urlToImage && (
+                    {news.image_url && (
                       <Link to={`/news/${idx + 3}`} state={{ article: news }}>
                         <img
-                          src={news.urlToImage}
+                          src={news.image_url}
                           alt="thumbnail"
                           className="w-full h-28 object-cover rounded mb-1"
                         />

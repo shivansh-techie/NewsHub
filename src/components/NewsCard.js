@@ -4,11 +4,19 @@ import { Link } from "react-router-dom";
 const NewsCard = ({ article, index }) => {
   return (
     <div className="bg-white rounded-xl shadow p-4">
-      {article.urlToImage && (
-        <img src={article.urlToImage} alt="news" className="w-full h-48 object-cover rounded" />
+      {article.image_url && (
+        <img
+          src={article.image_url}
+          alt="news"
+          className="w-full h-48 object-cover rounded"
+        />
       )}
+
       <h2 className="text-lg font-semibold mt-2">{article.title}</h2>
-      <p className="text-sm text-gray-600 mt-1">{article.description}</p>
+
+      <p className="text-sm text-gray-600 mt-1">
+        {article.description || article.content || "No description available."}
+      </p>
 
       <Link
         to={`/news/${index}`}
