@@ -1,0 +1,25 @@
+.news-card {
+  display: flex;
+  background-color: white;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.news-card img {
+  width: 200px;
+  object-fit: cover;
+}
+.news-content {
+  padding: 1rem;
+  flex: 1;
+}
+.news-content h3 {
+  margin: 0 0 0.5rem;
+}
+.news-content h3 a {
+  color: #cc0000;
+}
+.news-content p {
+  margin: 0 0 0.5rem;
+}
