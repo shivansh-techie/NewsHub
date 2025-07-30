@@ -1,6 +1,6 @@
-// src/pages/NewsDetail.js
 import React, { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import AdSense from "../components/AdSense";
 
 const NewsDetail = () => {
   const location = useLocation();
@@ -23,9 +23,6 @@ const NewsDetail = () => {
     );
   }
 
-  // Random ad positions: after title, after image, after content
-  const shouldShowAd = () => Math.random() < 0.5;
-
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-2">{article.title}</h1>
@@ -37,16 +34,7 @@ const NewsDetail = () => {
           : "Unknown date"}
       </p>
 
-      {shouldShowAd() && (
-        <ins
-          className="adsbygoogle block mb-6"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-7369141258488031"
-          data-ad-slot="8372469481"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      )}
+      <AdSense slot="8372469481" className="mb-6" />
 
       {article.image_url && (
         <img
@@ -56,16 +44,7 @@ const NewsDetail = () => {
         />
       )}
 
-      {shouldShowAd() && (
-        <ins
-          className="adsbygoogle block mb-6"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-7369141258488031"
-          data-ad-slot="7621327309"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      )}
+      <AdSense slot="7621327309" className="mb-6" />
 
       <p className="text-gray-700 mb-6 text-justify text-base leading-relaxed">
         {article.content ||
@@ -73,16 +52,7 @@ const NewsDetail = () => {
           "Full article content not available."}
       </p>
 
-      {shouldShowAd() && (
-        <ins
-          className="adsbygoogle block mb-6"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-7369141258488031"
-          data-ad-slot="8623561263"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      )}
+      <AdSense slot="8623561263" className="mb-6" />
 
       <a
         href={article.link || article.url}

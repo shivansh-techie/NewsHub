@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function AdSense() {
+const AdSense = ({ slot }) => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -13,9 +13,11 @@ export default function AdSense() {
     <ins className="adsbygoogle"
       style={{ display: 'block' }}
       data-ad-client="ca-pub-7369141258488031"
-      data-ad-slot="7621327309"
+      data-ad-slot={slot}
       data-ad-format="auto"
       data-full-width-responsive="true">
     </ins>
   );
-}
+};
+
+export default AdSense;

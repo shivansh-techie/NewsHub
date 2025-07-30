@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTopHeadlines } from "../utils/newsApi";
 import NewsCard from "../components/NewsCard";
+import AdSense from "../components/AdSense";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -35,7 +36,7 @@ const Home = () => {
     const loadLatestNews = async () => {
       try {
         const news = await fetchTopHeadlines();
-        setLatestHeadlines(news.slice(0, 6)); // ✅ Top 6
+        setLatestHeadlines(news.slice(0, 6));
       } catch (err) {
         console.error("Failed to fetch latest news:", err);
       }
@@ -86,16 +87,7 @@ const Home = () => {
         {/* Right Column - Sidebar */}
         <div className="bg-gray-100 p-4 rounded shadow-sm space-y-6">
           {/* Google AdSense Unit 1 */}
-          <div>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-7369141258488031"
-              data-ad-slot="7621327309"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-          </div>
+          <AdSense slot="7621327309" />
 
           {/* Latest Headlines Set 1 */}
           <div>
@@ -125,16 +117,7 @@ const Home = () => {
           </div>
 
           {/* Google AdSense Unit 2 */}
-          <div>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-7369141258488031"
-              data-ad-slot="8372469481"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-          </div>
+          <AdSense slot="8372469481" />
 
           {/* Affiliate Links */}
           <div>
@@ -185,10 +168,10 @@ const Home = () => {
       <footer className="text-xs text-center text-gray-500 mt-6 border-t pt-4">
         <p>© 2025 NewsHub. All Rights Reserved.</p>
         <div className="mt-2 flex justify-center space-x-4">
-          <a href="/about">About Us</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms">Terms</a>
+          <a href="/About">About Us</a>
+          <a href="/Contact">Contact</a>
+          <a href="/PrivacyPolicy">Privacy Policy</a>
+          <a href="/Terms">Terms</a>
         </div>
       </footer>
     </div>
